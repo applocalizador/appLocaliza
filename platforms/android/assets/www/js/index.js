@@ -91,6 +91,7 @@ app.papController = new c.PapController();
 app.agendaUsuarioController = new c.AgendaUsuarioController();
 app.agendaController = new c.AgendaController();
 app.notaController = new c.NotaController();
+app.dispositivosController = new c.DispositivosController();
 
 //app.bookingsController = new c.BookingsController();
 
@@ -135,6 +136,16 @@ $(document).delegate("#nota", "pagebeforecreate", function () {
     app.notaController.$notaSalir.off("tap").on("tap", function () {
         app.notaController.cerrarSession();
     });
+});
+
+$(document).delegate("#dispositivos", "pagebeforecreate", function () {
+    app.dispositivosController.init();
+    app.dispositivosController.$dispositivosSalir.off("tap").on("tap", function () {
+        app.dispositivosController.cerrarSession();
+    });
+});
+$(document).delegate("#dispositivos", "pageshow", function () {
+    cargarMapa();
 });
 
 $(document).delegate("#page-signin", "pagebeforecreate", function () {
