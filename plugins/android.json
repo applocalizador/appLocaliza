@@ -63,6 +63,9 @@
         },
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "com.app.oasys"
+        },
+        "cordova.plugins.diagnostic": {
+            "PACKAGE_NAME": "com.app.oasys"
         }
     },
     "dependent_plugins": {

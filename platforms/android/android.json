@@ -143,6 +143,32 @@
             {
               "xml": "<uses-permission android:name=\"android.permission.VIBRATE\" />",
               "count": 1
+            },
+            {
+              "xml": "<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\" />",
+              "count": 1
+            },
+            {
+              "xml": "<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\" />",
+              "count": 1
+            },
+            {
+              "xml": "<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\" />",
+              "count": 1
+            },
+            {
+              "xml": "<uses-permission android:name=\"android.permission.BLUETOOTH\" />",
+              "count": 1
+            }
+          ]
+        }
+      },
+      "config.xml": {
+        "parents": {
+          "/*": [
+            {
+              "xml": "<feature name=\"Diagnostic\"><param name=\"android-package\" value=\"cordova.plugins.Diagnostic\" /></feature>",
+              "count": 1
             }
           ]
         }
@@ -211,6 +237,9 @@
       "PACKAGE_NAME": "com.app.oasys"
     },
     "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.app.oasys"
+    },
+    "cordova.plugins.diagnostic": {
       "PACKAGE_NAME": "com.app.oasys"
     }
   },
@@ -668,6 +697,13 @@
         "navigator.notification",
         "navigator"
       ]
+    },
+    {
+      "file": "plugins/cordova.plugins.diagnostic/www/android/diagnostic.js",
+      "id": "cordova.plugins.diagnostic.Diagnostic",
+      "clobbers": [
+        "cordova.plugins.diagnostic"
+      ]
     }
   ],
   "plugin_metadata": {
@@ -691,6 +727,7 @@
     "cordova-plugin-splashscreen": "3.2.2",
     "cordova-plugin-statusbar": "2.1.3",
     "cordova-plugin-vibration": "2.1.2",
-    "cordova-plugin-whitelist": "1.2.2"
+    "cordova-plugin-whitelist": "1.2.2",
+    "cordova.plugins.diagnostic": "1.1.0"
   }
 }

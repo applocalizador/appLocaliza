@@ -1,6 +1,6 @@
 function cargarMapa() {
 //    $(document).on("pageinit", "#confirmar", function (e, data) {
-    var defaultPos = new google.maps.LatLng(4.807259, -75.744327); // Bobota
+    var defaultPos = new google.maps.LatLng(4.807259, -75.744327);
     function esperarGps() {
         cordova.plugins.diagnostic.isLocationEnabled(
                 function (enabled) {
@@ -33,7 +33,7 @@ function cargarMapa() {
                         'Se recomienda Activar el GPS para que el proceso sea automático. \nSi lo prefiere puede Seleccionar el centro de atención manualmente. ', // message
                         opcionesNoGps, // callback to invoke
                         'GPS Desactivado', // title
-                        ['Mostrar los Centros', 'Activar GPS']             // buttonLabels
+                        ['Mostrar Dispositivos Registrados', 'Activar GPS']             // buttonLabels
                         );
             }
             //maximumAge- Guarda la posicion por 5 minutos 
@@ -54,7 +54,8 @@ function cargarMapa() {
             zoom: 13,
             center: latlng,
             disableDefaultUI: true,
-            mapTypeId: google.maps.MapTypeId.ROADMAP};
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
 
         var map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
         var infowindow = new google.maps.InfoWindow({position: latlng, content: '<p>Mi posición</p>' + latlng});
@@ -88,10 +89,10 @@ function cargarMapa() {
                             if (ac.types.indexOf('locality') >= 0)
                                 city = ac.long_name;
                         }
-                        if (city != '') {
-                            $('#ciudad').html(city);
-                            cargarCafsCiudad(city, latlng, map);
-                        }
+//                        if (city != '') {
+//                            $('#ciudad').html(city);
+//                            cargarCafsCiudad(city, latlng, map);
+//                        }
                     } else {
                         window.alert('No se encontró la ciudad');
                     }
