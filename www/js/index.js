@@ -140,12 +140,17 @@ $(document).delegate("#nota", "pagebeforecreate", function () {
 
 $(document).delegate("#dispositivos", "pagebeforecreate", function () {
     app.dispositivosController.init();
+    app.dispositivosController.cargarListaDispositivos(c.Session.getInstance().get().usuario);
+    app.dispositivosController.$btnCargarDispositivos.off("tap").on("tap", function () {
+        app.dispositivosController.cargarMapaDispositivos();
+    });
     app.dispositivosController.$dispositivosSalir.off("tap").on("tap", function () {
         app.dispositivosController.cerrarSession();
     });
 });
 $(document).delegate("#dispositivos", "pageshow", function () {
-    cargarMapa();
+    app.dispositivosController.cargarMapaDispositivo();
+//    cargarMapa();
 });
 
 $(document).delegate("#page-signin", "pagebeforecreate", function () {

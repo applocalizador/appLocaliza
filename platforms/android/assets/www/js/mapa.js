@@ -15,7 +15,7 @@ function cargarMapa() {
     }
     function opcionesNoGps(buttonIndex) {
         if (buttonIndex == 1) {
-            alert("Seleccionar la Ciudad");
+//            alert("Seleccionar la Ciudad");
             MuestraMapa(defaultPos);
         }
         if (buttonIndex == 2) {
@@ -30,9 +30,9 @@ function cargarMapa() {
             }
             function falla(error) {
                 navigator.notification.confirm(
-                        'Se recomienda Activar el GPS para que el proceso sea automático. \nSi lo prefiere puede Seleccionar el centro de atención manualmente. ', // message
+                        'Por favor activar el GPS para localizar el dispositivo actual. \nSi lo prefiere puede ver los dipositivos asociados. ', // message
                         opcionesNoGps, // callback to invoke
-                        'GPS Desactivado', // title
+                        'GPS Inactivo', // title
                         ['Mostrar Dispositivos Registrados', 'Activar GPS']             // buttonLabels
                         );
             }
@@ -59,7 +59,7 @@ function cargarMapa() {
 
         var map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
         var infowindow = new google.maps.InfoWindow({position: latlng, content: '<p>Mi posición</p>' + latlng});
-        var infowindowCaf = new google.maps.InfoWindow({position: latlng, content: '<p>Nombre de Caf</p>'});
+        var infowindowCaf = new google.maps.InfoWindow({position: latlng, content: '<p>Dispositivo actual</p>'});
         var geocoder = new google.maps.Geocoder;
 
         var marker = new google.maps.Marker({

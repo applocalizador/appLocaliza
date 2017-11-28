@@ -1,5 +1,5 @@
 //var servicio = "http://rs-pvapp.rhcloud.com/webresources/";
-//var servicio = "http://localhost:8081/rs/webresources/";
+//var servicio = "http://localhost:8081/webresources/";
 var servicio = "http://190.14.226.155:8095/rs/webresources/";
 
 var usuario = {
@@ -52,6 +52,7 @@ c.Settings.confirmarAutorizacionUrl = servicio + 'pap/post/autorizacionesUsuario
 c.Settings.alistamientoUrl = servicio + "pap/get/alistamientosUsuario";
 c.Settings.bookingsUrl = servicio + "generic/post/validarUsuario";
 c.Settings.direccionesUsuarioUrl = servicio + "generic/get/direccionesUsuario";
+c.Settings.dispositivosUsuarioUrl = servicio + "localizador/get/dispositivos/usuario/{correo}";
 c.Settings.sessionIdKey = "pap-session";
 c.Settings.sessionTimeoutInMSec = 86400000 * 30;   // 30 days.
 c.Settings.usuario = usuario;
