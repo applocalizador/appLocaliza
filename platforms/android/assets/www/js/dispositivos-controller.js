@@ -77,6 +77,8 @@ c.DispositivosController.prototype.cargarMapaDispositivos = function () {
         map: mapa,
         title: "Mi posición",
         animation: google.maps.Animation.DROP});
+    mapa.setCenter(latlng);
+    m = mapa;
 };
 
 c.DispositivosController.prototype.cargarMapaDispositivo = function () {
