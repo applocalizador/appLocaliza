@@ -58,6 +58,9 @@ c.DispositivosController.prototype.cerrarSession = function () {
 c.DispositivosController.prototype.cargarMapaDispositivos = function () {
 //    var latlng = new google.maps.LatLng(4.807259, -75.744327);
     var latlngCadena = $("#select-dispositivos").val();
+    if (latlngCadena == null || latlngCadena == '-1') {
+        return;
+    }
     var lat = parseFloat(latlngCadena.split("|")[0]);
     var lng = parseFloat(latlngCadena.split("|")[1]);
     var latlng = new google.maps.LatLng(lat, lng);
