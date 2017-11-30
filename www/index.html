@@ -86,8 +86,8 @@
         <div data-role="page" id="page-signin" >
             <div role="main" class="ui-content">
                 <!-- <img src="images/oasys.png" alt="PAP" style="width: 100%">-->
-                
-                
+
+
                 <div id="ctn-err" class="bi-invisible"></div>
                 <input type="text" name="txt-documento" id="txt-documento" value=""
                        placeholder="Usuario">
@@ -152,24 +152,29 @@
         <div id="grupos" data-role="page">
             <div data-role="header" data-position="fixed" data-theme="d">
                 <h1>Grupos</h1>
+
+                <a data-role="button" id="pgNuevoGrupo" data-icon="plus" data-theme="b" class="ui-btn-right">Nuevo</a>
             </div>
             <div role="main" class="ui-content" >
-             <div class="ui-body ui-body-a ui-corner-all" style="background-color:rgba(255, 255, 255, 0.8);padding: 20px">    
-                     <p>Grupos              
-                    </p>
+                <div class="ui-body ui-body-a ui-corner-all" style="background-color:rgba(255, 255, 255, 0.8);padding: 20px">    
+                    
                     <form style="margin:0px">
-                        <div id="div-alistamientos-grupos"></div>
-                        
-                      <a id="btn-adicionar-grupo" class="ui-btn ui-btn-b ui-corner-all bi-top-margin-1-5" >Adicionar Grupo</a>
+                        <ul data-role="listview" data-inset="true" id="listaGrupos" data-autodividers="true" data-filter="true" data-filter-placeholder="Buscar Grupo" data-filter-reveal="false">
+                            <li data-role="list-divider"></li>
+                            <li id="noGrupo"></li>
+
+                        </ul>
+
+
                     </form>
                 </div>
-                
+
             </div>
 
             <div data-role="footer" data-theme="b" data-id="menu-opciones" data-position="fixed">
                 <div data-role="navbar" data-iconpos="top">
                     <ul>
-                         <li><a href="#menu" data-icon="home" class="ui-state-persist">Inicio</a></li>
+                        <li><a href="#menu" data-icon="home" class="ui-state-persist">Inicio</a></li>
                         <li><a href="#grupos" data-icon="grid">Grupos</a></li>
                         <li><a href="#dispositivos" data-icon="plus" >Dispositivos</a></li>
                         <li><a id="menu-salir" data-icon="arrow-l" >Salir</a></li>
