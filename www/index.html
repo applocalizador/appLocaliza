@@ -155,7 +155,7 @@
             <div data-role="header" data-position="fixed" data-theme="d">
                 <h1>Grupos</h1>
 
-                <a data-role="button" id="pgNuevoGrupo" data-icon="plus" data-theme="b" class="ui-btn-right">Nuevo</a>
+                <a data-role="button" href="#pgaddGrupo" id="pgNuevoGrupo" data-icon="plus" data-theme="b" class="ui-btn-right">Nuevo</a>
             </div>
             <div role="main" class="ui-content" >
                 <div class="ui-body ui-body-a ui-corner-all" style="background-color:rgba(255, 255, 255, 0.8);padding: 20px">    
@@ -191,7 +191,7 @@
 
             <header id="pgAddGrupoheader" data-role="header" data-position="fixed">
                 <h1>Nuevo Grupo</h1>
-                <a data-role="button" id="pgAddGrupoVolver" data-icon="arrow-l" class="ui-btn-left">Volver</a>
+                <a data-role="button" href="#grupos" id="pgAddGrupoVolver" data-icon="arrow-l" class="ui-btn-left">Volver</a>
             </header>
             <div id="pgAddNotecontent" data-role="content" class="content">
                 <form action="#" method="post" id="pgAddGrupoForm" name="pgAddGrupoForm">
@@ -199,7 +199,9 @@
                         <label for="pgAddNoteTitle" id="lblpgAddNoteTitle">Grupo<span style='color:red;'>*</span></label>
                         <input type="text" required="required" title="Nombre del Grupo." name="txtNombreGrupo" 
                                id="txtNombreGrupo" 
-                               placeholder="Nombre del Grupo." autocomplete="off" data-clear-btn="true"></input>
+                               placeholder="Nombre del Grupo." autocomplete="off" data-clear-btn="true">
+                                   
+                        </input>
                     </div>
                    
                     <div><button type="submit" id="btnGuardarGrupo" class="ui-btn ui-corner-all ui-shadow ui-btn-b">Guardar</button>
