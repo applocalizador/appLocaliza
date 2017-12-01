@@ -42,13 +42,14 @@ c.GruposController.prototype.cargarGrupos = function (usuario) {
             {
                 var grupo = JSON.parse(resp[n]);
                 var nombreGrupo = grupo.nombre;
+                
                 var nLnk = nombreGrupo.replace(/-/g,' ');
-                var id = grupo.id;
-                html += NoteLi.replace(/ID/g,nLnk).replace(/LINK/g,id);
+                var id = grupo.gruposPK.id;
+                html += GrupoLi.replace(/ID/g,nLnk).replace(/LINK/g,id);
 
             }
             
-            $('#listaGrupos').html(NoteHdr + html).listview('refresh');
+            $('#listaGrupos').html(GrupoHdr + html).listview('refresh');
 
           
         },
