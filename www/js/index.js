@@ -99,7 +99,7 @@ $(document).delegate("#grupos", "pagebeforecreate", function () {
     app.gruposController.init();
        
   
-    app.agendaController.cargarGrupos(c.Session.getInstance().get().usuario);
+    app.gruposController.cargarGrupos(c.Session.getInstance().get().usuario);
 
 
     /* app.agendaController.$btnCargarAgenda.off("tap").on("tap", function () {
@@ -109,6 +109,8 @@ $(document).delegate("#grupos", "pagebeforecreate", function () {
         app.agendaController.cerrarSession();
     });*/
 });
+
+
 
 
 $(document).delegate("#dispositivos", "pagebeforecreate", function () {
