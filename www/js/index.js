@@ -108,6 +108,13 @@ $(document).delegate("#grupos", "pagebeforecreate", function () {
     app.agendaController.$agendaSalir.off("tap").on("tap", function () {
         app.agendaController.cerrarSession();
     });*/
+    
+    app.gruposController.$gruposSalir.off("tap").on("tap", function () {
+         
+         app.gruposController.cerrarSession();
+    });
+    
+     
 });
 
 
