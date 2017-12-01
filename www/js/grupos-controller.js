@@ -14,18 +14,23 @@ c.GruposController = function () {
    
     //definir las variables
     this.$grupos = null;
-    this.$dispositivosSalir = null;
+    this.$gruposSalir = null;
     this.$pageSignIn = null;
     this.$btnCargarGrupos = null;
 };
 c.GruposController.prototype.init = function () {
     //asociar las variables a los html
-     this.$grupos = $("#listaGrupos");
-    //this.$dispositivosSalir = $("#dispositivos-salir", this.$dispositivos);
-    //this.$pageSignIn = "#page-signin";
+    this.$grupos = $("#listaGrupos");
+    this.$gruposSalir = $("#grupo-salir", this.$grupos);
+    this.$pageSignIn = "#page-signin";
     //this.$btnCargarGrupos = $("#btn-cargar-dispositivos", this.$grupos);
 };
 
+c.GruposController.prototype.cerrarSession = function () {
+    var me = this;
+    c.Session.deleteInstance();
+    $.mobile.navigate(me.$pageSignIn);
+};
 
 c.GruposController.prototype.cargarGrupos = function (usuario) {
     var url = c.Settings.gruposUrl.replace("{correo}", usuario.correo);
