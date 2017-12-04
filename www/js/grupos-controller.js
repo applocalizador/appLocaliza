@@ -22,6 +22,7 @@ c.GruposController.prototype.init = function () {
     //asociar las variables a los html
     this.$grupos = $("#listaGrupos");
     this.$gruposSalir = $("#grupo-salir", this.$grupos);
+    
     this.$pageSignIn = "#page-signin";
     //this.$btnCargarGrupos = $("#btn-cargar-dispositivos", this.$grupos);
 };
