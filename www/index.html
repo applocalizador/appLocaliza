@@ -189,22 +189,26 @@
 
         <div id="pgaddGrupo" data-role="page">
 
-            <header id="pgAddGrupoheader"  data-role="header" data-position="fixed">
+            <div data-role="header" id="pgAddGrupoheader" style="background-color:#08b"  data-position="fixed">
                 <h1>Nuevo Grupo</h1>
-                <a data-role="button" href="#grupos" id="pgAddGrupoVolver" data-icon="arrow-l" class="ui-btn-left">Volver</a>
-            </header>
+                <a data-role="button" href="#grupos" id="pgAddGrupoVolver" style="background-color:#08b" data-icon="arrow-l" class="ui-btn-left">Volver</a>
+           </div>
             <div id="pgAddNotecontent" data-role="content" class="content">
                 <form action="#" method="post" id="pgAddGrupoForm" name="pgAddGrupoForm">
                     <div data-role="fieldcontain">
                         <label for="pgAddNoteTitle" id="lblpgAddNoteTitle">Grupo<span style='color:red;'>*</span></label>
+                        
+                       
                         <input type="text" required="required" title="Nombre del Grupo." name="txtNombreGrupo" 
                                id="txtNombreGrupo" 
                                placeholder="Nombre del Grupo." autocomplete="off" data-clear-btn="true">
-                                   
+                        
                         </input>
-                    </div>
-                   
-                    <div><button type="submit" id="btnGuardarGrupo" class="ui-btn ui-corner-all ui-shadow ui-btn-b">Guardar</button>
+                                   
+                        
+                   </div>
+                    <div>
+                        <button type="submit" id="btnGuardarGrupo" class="ui-btn ui-corner-all ui-shadow ui-btn-b">Guardar</button>
                     </div>
                 </form>
             </div>
