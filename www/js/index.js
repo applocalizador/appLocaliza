@@ -130,6 +130,8 @@ $(document).delegate("#dispositivos", "pagebeforecreate", function () {
         app.dispositivosController.cerrarSession();
     });
 });
+
+
 $(document).delegate("#dispositivos", "pageshow", function () {
     app.dispositivosController.cargarMapaDispositivo();
 //    cargarMapa();
