@@ -101,17 +101,20 @@ $(document).delegate("#grupos", "pagebeforecreate", function () {
   
     app.gruposController.cargarGrupos(c.Session.getInstance().get().usuario);
 
-
-    /* app.agendaController.$btnCargarAgenda.off("tap").on("tap", function () {
-        app.agendaController.cargarAgendaDia(c.Session.getInstance().get().usuario, app.agendaController.$fechaAgenda.val());
-    });
-    app.agendaController.$agendaSalir.off("tap").on("tap", function () {
-        app.agendaController.cerrarSession();
-    });*/
-    
+      
     app.gruposController.$gruposSalir.off("tap").on("tap", function () {
          
          app.gruposController.cerrarSession();
+    });
+    
+    app.gruposController.$gruposAddSalir.off("tap").on("tap", function () {
+         
+         app.gruposController.cerrarSession();
+    });
+    
+    app.gruposController.$btnGuardarGrupos.off("tap").on("tap", function () {
+        alert('ingresa');
+        app.gruposController.guardarGrupo();
     });
     
      
