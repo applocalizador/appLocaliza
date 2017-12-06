@@ -16,6 +16,38 @@ c.DispositivosController.prototype.init = function () {
     this.selectDispositivos = $("#select-dispositivos", this.$dispositivos);
 };
 
+c.DispositivosController.prototype.cargarListaGruposUsuario = function (usuario) {
+    var url = c.Settings.gruposUrl.replace("{correo}", usuario.correo);
+        
+    $.ajax({
+        url: url,
+        type: c.Settings.TYPE_GET,
+        dataType: c.Settings.DATA_TYPE_JSON,
+        contentType: c.Settings.APPLICATION_JSON,
+        success: function (resp) {
+            for (var n = 0; n < resp.length; n++)
+            {
+                var grupo = JSON.parse(resp[n]);
+                
+                $("#select-grupos").append($('<option>', {
+                    value: grupo.gruposPK.codGrupo,
+                    text: grupo.nombre
+                }));
+
+            }
+            $("#select-grupos").selectmenu('refresh');
+        },
+        error: function (e) {
+            var mensaje = message(e);
+            if (mensaje == null) {
+                console.log("error al cargar grupos.")
+            } else {
+                console.log(mensaje);
+            }
+        }
+    });
+};
+
 c.DispositivosController.prototype.cargarListaDispositivos = function (usuario) {
 //    if ($('#epsUsuario').has('option').length <= 1) { selectDispositivos
     var url = c.Settings.dispositivosUsuarioUrl.replace("{correo}", usuario.correo);
