@@ -125,6 +125,7 @@ $(document).delegate("#grupos", "pagebeforecreate", function () {
 
 $(document).delegate("#dispositivos", "pagebeforecreate", function () {
     app.dispositivosController.init();
+    app.dispositivosController.cargarListaGruposUsuario(c.Session.getInstance().get().usuario);
     app.dispositivosController.cargarListaDispositivos(c.Session.getInstance().get().usuario);
     app.dispositivosController.$btnCargarDispositivos.off("tap").on("tap", function () {
         app.dispositivosController.cargarMapaDispositivos();
