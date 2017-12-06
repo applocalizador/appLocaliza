@@ -5,7 +5,7 @@
  */
 
 var c = c || {};
-var GrupoLi = '<li ><a href="#pgEditarGrupo?Title=LINK">ID</a></li>';
+var GrupoLi = '<li ><a href="#pgEditarGrupo?id=LINK">ID</a></li>';
 var GrupoHdr = '<li data-role="list-divider">Grupo</li>';
 var noGrupo = '<li id="noNote">No hay grupos disponibles</li>';
 
@@ -14,20 +14,33 @@ c.GruposController = function () {
    
     //definir las variables
     this.$grupos = null;
+    this.$gruposAdd = null;
     this.$gruposSalir = null;
+    this.$gruposAddSalir = null;
     this.$pageSignIn = null;
-    this.$btnCargarGrupos = null;
+    this.$btnGuardarGrupos = null;
 };
 c.GruposController.prototype.init = function () {
     //asociar las variables a los html
-    this.$grupos = $("#listaGrupos");
-    this.$gruposSalir = $("#grupo-salir", this.$grupos);
+    this.$grupos = $("#grupos");
+    this.$gruposAdd = $("#grupos-add");
+    this.$gruposSalir = $("#grupos-salir", this.$grupos);
     
+    this.$btnGuardarGrupos = $("#btn-guardar-grupo", this.$gruposAdd);
+    this.$gruposAddSalir = $("#gruposadd-salir", this.$gruposAdd);
+     
     this.$pageSignIn = "#page-signin";
     //this.$btnCargarGrupos = $("#btn-cargar-dispositivos", this.$grupos);
 };
 
 c.GruposController.prototype.cerrarSession = function () {
+    var me = this;
+    c.Session.deleteInstance();
+    $.mobile.navigate(me.$pageSignIn);
+};
+
+c.GruposController.prototype.guardarGrupo = function () {
+    alert("Ingreso");
     var me = this;
     c.Session.deleteInstance();
     $.mobile.navigate(me.$pageSignIn);
@@ -50,7 +63,7 @@ c.GruposController.prototype.cargarGrupos = function (usuario) {
                 var nombreGrupo = grupo.nombre;
                 
                 var nLnk = nombreGrupo.replace(/-/g,' ');
-                var id = grupo.gruposPK.id;
+                var id = grupo.gruposPK.codGrupo;
                 html += GrupoLi.replace(/ID/g,nLnk).replace(/LINK/g,id);
 
             }
