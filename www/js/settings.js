@@ -52,6 +52,7 @@ c.Settings.alistamientoUrl = servicio + "pap/get/alistamientosUsuario";
 c.Settings.bookingsUrl = servicio + "generic/post/validarUsuario";
 c.Settings.direccionesUsuarioUrl = servicio + "generic/get/direccionesUsuario";
 c.Settings.dispositivosUsuarioUrl = servicio + "localizador/get/dispositivos/usuario/{correo}";
+c.Settings.dispositivosGrupoUsuarioUrl = servicio + "localizador/get/dispositivos/grupo/usuario/{correo}/{codGrupo}";
 c.Settings.gruposUrl = servicio + "localizador/get/grupos/usuario/{correo}";
 c.Settings.sessionIdKey = "pap-session";
 c.Settings.sessionTimeoutInMSec = 86400000 * 30;   // 30 days.
