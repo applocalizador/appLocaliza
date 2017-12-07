@@ -97,27 +97,27 @@ app.gruposController = new c.GruposController();
 
 $(document).delegate("#grupos", "pagebeforecreate", function () {
     app.gruposController.init();
-       
-  
+
+
     app.gruposController.cargarGrupos(c.Session.getInstance().get().usuario);
 
-      
+
     app.gruposController.$gruposSalir.off("tap").on("tap", function () {
-         
-         app.gruposController.cerrarSession();
+
+        app.gruposController.cerrarSession();
     });
-    
+
     app.gruposController.$gruposAddSalir.off("tap").on("tap", function () {
-         
-         app.gruposController.cerrarSession();
+
+        app.gruposController.cerrarSession();
     });
-    
+
     app.gruposController.$btnGuardarGrupos.off("tap").on("tap", function () {
         alert('ingresa');
         app.gruposController.guardarGrupo();
     });
-    
-     
+
+
 });
 
 
@@ -125,19 +125,23 @@ $(document).delegate("#grupos", "pagebeforecreate", function () {
 
 $(document).delegate("#dispositivos", "pagebeforecreate", function () {
     app.dispositivosController.init();
-    app.dispositivosController.cargarListaGruposUsuario(c.Session.getInstance().get().usuario);
-    app.dispositivosController.cargarListaDispositivos(c.Session.getInstance().get().usuario);
+//    app.dispositivosController.cargarListaDispositivos(c.Session.getInstance().get().usuario);
     app.dispositivosController.$btnCargarDispositivos.off("tap").on("tap", function () {
         app.dispositivosController.cargarMapaDispositivos();
     });
     app.dispositivosController.$dispositivosSalir.off("tap").on("tap", function () {
         app.dispositivosController.cerrarSession();
     });
+
+    app.dispositivosController.$selectGrupos.change(function () {
+        app.dispositivosController.cargarListaDispositivosGrupo(c.Session.getInstance().get().usuario, app.dispositivosController.$selectGrupos.val());
+    });
 });
 
 
 $(document).delegate("#dispositivos", "pageshow", function () {
     app.dispositivosController.cargarMapaDispositivo();
+    app.dispositivosController.cargarListaGruposUsuario(c.Session.getInstance().get().usuario);
 //    cargarMapa();
 });
 
