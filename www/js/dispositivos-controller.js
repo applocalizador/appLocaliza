@@ -6,19 +6,32 @@ c.DispositivosController = function () {
     this.$dispositivosSalir = null;
     this.$pageSignIn = null;
     this.$btnCargarDispositivos = null;
-    this.selectDispositivos = null;
+    this.$selectDispositivos = null;
+    this.$selectGrupos = null;
 };
 c.DispositivosController.prototype.init = function () {
     this.$dispositivos = $("#dispositivos");
     this.$dispositivosSalir = $("#dispositivos-salir", this.$dispositivos);
     this.$pageSignIn = "#page-signin";
     this.$btnCargarDispositivos = $("#btn-cargar-dispositivos", this.$dispositivos);
-    this.selectDispositivos = $("#select-dispositivos", this.$dispositivos);
+    this.$selectDispositivos = $("#select-dispositivos", this.$dispositivos);
+    this.$selectGrupos = $("#select-grupos", this.$dispositivos);
+
 };
 
 c.DispositivosController.prototype.cargarListaGruposUsuario = function (usuario) {
     var url = c.Settings.gruposUrl.replace("{correo}", usuario.correo);
-        
+    this.$selectGrupos.find('option').remove();
+    this.$selectGrupos.append($('<option>', {
+        value: -1,
+        text: 'Seleccione Grupo'
+    }, true));
+    this.$selectDispositivos.find('option').remove();
+    this.$selectDispositivos.append($('<option>', {
+        value: -1,
+        text: 'Seleccione Grupo'
+    }, true));
+    this.$selectDispositivos.selectmenu('refresh');
     $.ajax({
         url: url,
         type: c.Settings.TYPE_GET,
@@ -28,7 +41,7 @@ c.DispositivosController.prototype.cargarListaGruposUsuario = function (usuario)
             for (var n = 0; n < resp.length; n++)
             {
                 var grupo = JSON.parse(resp[n]);
-                
+
                 $("#select-grupos").append($('<option>', {
                     value: grupo.gruposPK.codGrupo,
                     text: grupo.nombre
@@ -48,15 +61,27 @@ c.DispositivosController.prototype.cargarListaGruposUsuario = function (usuario)
     });
 };
 
-c.DispositivosController.prototype.cargarListaDispositivos = function (usuario) {
+c.DispositivosController.prototype.cargarListaDispositivosGrupo = function (usuario, codGrupo) {
 //    if ($('#epsUsuario').has('option').length <= 1) { selectDispositivos
-    var url = c.Settings.dispositivosUsuarioUrl.replace("{correo}", usuario.correo);
+        $("#select-dispositivos").find('option').remove();
+    $("#select-dispositivos").append($('<option>', {
+        value: -1,
+        text: 'Seleccione Dispositivo'
+    }, true));
+    $("#select-dispositivos").selectmenu('refresh');
+    var url = c.Settings.dispositivosGrupoUsuarioUrl.replace("{correo}", usuario.correo).replace("{codGrupo}", codGrupo);
+    this.$selectDispositivos.find('option').remove();
     $.ajax({
         url: url,
         type: c.Settings.TYPE_GET,
         dataType: c.Settings.DATA_TYPE_JSON,
         contentType: c.Settings.APPLICATION_JSON,
         success: function (resp) {
+            $("#select-dispositivos").find('option').remove();
+            $("#select-dispositivos").append($('<option>', {
+                value: -1,
+                text: 'Seleccione Dispositivo'
+            }, true));
             for (var n = 0; n < resp.length; n++)
             {
                 var object = JSON.parse(resp[n]);
@@ -79,6 +104,7 @@ c.DispositivosController.prototype.cargarListaDispositivos = function (usuario) 
         }
     });
 //    }
+
 };
 
 c.DispositivosController.prototype.cerrarSession = function () {
