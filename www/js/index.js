@@ -112,10 +112,19 @@ $(document).delegate("#grupos", "pagebeforecreate", function () {
          app.gruposController.cerrarSession();
     });
     
-    app.gruposController.$btnGuardarGrupos.off("tap").on("tap", function () {
+    /*
+     app.gruposController.$btnGuardarGrupos.off("tap").on("tap", function () {
         alert('ingresa');
         app.gruposController.guardarGrupo();
     });
+     */
+    
+      app.gruposController.$btnGuardarGrupos.on("click", function () {
+        alert('ingresa al guardar');
+        
+        app.gruposController.guardarGrupo();
+    });
+    
     
      
 });
