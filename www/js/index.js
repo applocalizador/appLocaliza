@@ -119,10 +119,26 @@ $(document).delegate("#grupos", "pagebeforecreate", function () {
     });
      */
     
-      app.gruposController.$btnGuardarGrupos.on("click", function () {
-        alert('ingresa al guardar');
+      app.gruposController.$btnGuardarGrupos.on("click", function (e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();  
+        var nombreGrupo = app.gruposController.$nombreGrupo.val();
         
-        app.gruposController.guardarGrupo();
+        if (nombreGrupo != '' ){
+            
+          
+        alert('ingresa al guardar'+nombreGrupo+" "+c.Session.getInstance().get().usuario.correo);
+        
+        app.gruposController.guardarGrupo(nombreGrupo,c.Session.getInstance().get().usuario.correo);
+            
+            
+       
+          }
+          else {
+               alert('Por favor ingrese el nombre del grupo');
+               app.gruposController.$nombreGrupo.focus();
+          }
+              
     });
     
     
