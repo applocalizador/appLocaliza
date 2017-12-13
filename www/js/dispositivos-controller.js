@@ -182,6 +182,7 @@ c.DispositivosController.prototype.cargarMapaDispositivo = function () {
 //    var defaultPos = new google.maps.LatLng(4.807259, -75.744327);
     var defaultPos = new google.maps.LatLng(4.812132, -75.706377);
 //    MuestraMapa(defaultPos);//temporal
+    $.mobile.loading("show");
     function esperarGps() {
         cordova.plugins.diagnostic.isLocationEnabled(
                 function (enabled) {
@@ -208,6 +209,7 @@ c.DispositivosController.prototype.cargarMapaDispositivo = function () {
             function exito(pos) {
                 latitudeActual = pos.coords.latitude;
                 longitudActual = pos.coords.longitude;
+                c.DispositivosController.prototype.actualizarUbicacionMovilUsuario(c.Session.getInstance().get().usuario);
                 MuestraMapa(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
             }
             function falla(error) {
@@ -276,6 +278,7 @@ c.DispositivosController.prototype.cargarMapaDispositivo = function () {
             });
         }
         m = map;
+        $.mobile.loading("hide");
     }
     validarGps();
 };
