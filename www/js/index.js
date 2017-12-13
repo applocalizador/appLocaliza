@@ -151,12 +151,8 @@ $(document).delegate("#dispositivos", "pagebeforecreate", function () {
 
 
 $(document).delegate("#dispositivos", "pageshow", function () {
-    $.mobile.loading("show");
     app.dispositivosController.cargarMapaDispositivo();
-    app.dispositivosController.actualizarUbicacionMovilUsuario(c.Session.getInstance().get().usuario);
     app.dispositivosController.cargarListaGruposUsuario(c.Session.getInstance().get().usuario);
-    $.mobile.loading("hide");
-//    cargarMapa();
 });
 
 $(document).delegate("#page-signin", "pagebeforecreate", function () {
