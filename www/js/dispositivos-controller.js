@@ -1,5 +1,7 @@
 var c = c || {};
-var m;
+var m, latitudeActual = null, longitudActual = null;
+
+
 
 c.DispositivosController = function () {
     this.$dispositivos = null;
@@ -61,9 +63,43 @@ c.DispositivosController.prototype.cargarListaGruposUsuario = function (usuario)
     });
 };
 
+c.DispositivosController.prototype.actualizarUbicacionMovilUsuario = function (usuario) {
+    if (latitudeActual != null && longitudActual != null) {
+        LocalizacionesDispositivo = new Object();
+        LocalizacionesDispositivo.localizacionesDispositivoPK = new Object();
+        LocalizacionesDispositivo.localizacionesDispositivoPK.correo = usuario.correo;
+        LocalizacionesDispositivo.localizacionesDispositivoPK.codDispositivo = usuario.dispositivos.dispositivosPK.codDispositivo;
+
+        LocalizacionesDispositivo.latitude = latitudeActual;
+        LocalizacionesDispositivo.longitud = longitudActual;
+
+//        LocalizacionesDispositivo.latitude = 4.820259;
+//        LocalizacionesDispositivo.longitud = -75.705327;
+
+        $.ajax({
+            url: c.Settings.localizacionesDispisitivoUrl,
+            type: c.Settings.TYPE_POST,
+            dataType: c.Settings.DATA_TYPE_JSON,
+            contentType: c.Settings.APPLICATION_JSON,
+            data: JSON.stringify(LocalizacionesDispositivo),
+            success: function (resp) {
+                console.log("posicion enviada.")
+            },
+            error: function (e) {
+                var mensaje = message(e);
+                if (mensaje == null) {
+                    console.log("error al enviar la posicion.")
+                } else {
+                    console.log(mensaje);
+                }
+            }
+        });
+    }
+};
+
 c.DispositivosController.prototype.cargarListaDispositivosGrupo = function (usuario, codGrupo) {
 //    if ($('#epsUsuario').has('option').length <= 1) { selectDispositivos
-        $("#select-dispositivos").find('option').remove();
+    $("#select-dispositivos").find('option').remove();
     $("#select-dispositivos").append($('<option>', {
         value: -1,
         text: 'Seleccione Dispositivo'
@@ -170,6 +206,8 @@ c.DispositivosController.prototype.cargarMapaDispositivo = function () {
     function validarGps() {
         if (navigator.geolocation) {
             function exito(pos) {
+                latitudeActual = pos.coords.latitude;
+                longitudActual = pos.coords.longitude;
                 MuestraMapa(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
             }
             function falla(error) {

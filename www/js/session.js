@@ -5,7 +5,7 @@ c.Session = (function () {
 
     function init() {
 
-        var sessionIdKey = "oasys-session";
+        var sessionIdKey = c.Settings.sessionIdKey;
 
         return {
             // Public methods and variables.
@@ -35,7 +35,9 @@ c.Session = (function () {
             return instance;
         }
         , deleteInstance: function () {
-            var sessionIdKey = "oasys-session";
+//            var sessionIdKey = "oasys-session";
+            var sessionIdKey = c.Settings.sessionIdKey;
+            
             window.localStorage.removeItem(sessionIdKey);
         }
     };

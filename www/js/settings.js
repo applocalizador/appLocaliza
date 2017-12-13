@@ -3,7 +3,7 @@
  var servicio = "http://190.14.226.155:8095/rs/webresources/";
 var usuario = {
     codTipoDocumento: 0, documentoIdentidad: null, nombre: null, apellido: null, usuario: null, correo: null, edad: 0, fechaNacimiento: null, codigo: null,
-    clave: null, claveConfirmacion: null, sexo: null, direccion: null, telefono: null, telefonoCelular: null, regId: null, tUsuarioSiuDirecciones: tUsuarioSiuDirecciones
+    clave: null, claveConfirmacion: null, sexo: null, direccion: null, telefono: null, telefonoCelular: null, regId: null, dispositivos: Dispositivos
 };
 
 var solicitudRegistro = {
@@ -25,6 +25,24 @@ var tUsuarioSiuDireccionesPK = {
 var tUsuarioSiuDirecciones = {
     tUsuarioSiuDireccionesPK: tUsuarioSiuDireccionesPK, telefono: null
 };
+
+var DispositivosPK = {
+    correo: null, codDispositivo: 0
+};
+
+var Dispositivos = {
+    dispositivosPK: DispositivosPK, identificador: null, fecha: null, serial: null
+};
+
+var LocalizacionesDispositivoPK = {
+    correo: null, codDispositivo: 0, codLocalizacion: 0
+};
+
+var LocalizacionesDispositivo = {
+    localizacionesDispositivoPK : LocalizacionesDispositivoPK, fecha: null, latitude: 0, longitud: 0
+};
+
+
 //var servicio = "http://10.1.1.185:8095/paprs/webresources/";
 //var servicio = "http://localhost:9090/webresources/";
 //var servicio = "http://localhost:8080/webresources/";
@@ -53,10 +71,12 @@ c.Settings.bookingsUrl = servicio + "generic/post/validarUsuario";
 c.Settings.direccionesUsuarioUrl = servicio + "generic/get/direccionesUsuario";
 c.Settings.dispositivosUsuarioUrl = servicio + "localizador/get/dispositivos/usuario/{correo}";
 c.Settings.dispositivosGrupoUsuarioUrl = servicio + "localizador/get/dispositivos/grupo/usuario/{correo}/{codGrupo}";
+c.Settings.localizacionesDispisitivoUrl = servicio + "localizador/post/localizaciones/dispositivo";
 c.Settings.gruposUrl = servicio + "localizador/get/grupos/usuario/{correo}";
-c.Settings.sessionIdKey = "pap-session";
+c.Settings.sessionIdKey = "localiza-session";
 c.Settings.sessionTimeoutInMSec = 86400000 * 30;   // 30 days.
 c.Settings.usuario = usuario;
+c.Settings.usuario.dispositivos = Dispositivos;
 c.Settings.solicitudRegistro = solicitudRegistro;
 c.Settings.municipiosUrl = servicio + 'generic/get/municipios/';
 

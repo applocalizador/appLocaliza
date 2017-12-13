@@ -111,22 +111,22 @@ $(document).delegate("#grupos", "pagebeforecreate", function () {
 
         app.gruposController.cerrarSession();
     });
-    
+
     /*
      app.gruposController.$btnGuardarGrupos.off("tap").on("tap", function () {
-        alert('ingresa');
-        app.gruposController.guardarGrupo();
-    });
+     alert('ingresa');
+     app.gruposController.guardarGrupo();
+     });
      */
-    
-      app.gruposController.$btnGuardarGrupos.on("click", function () {
+
+    app.gruposController.$btnGuardarGrupos.on("click", function () {
         alert('ingresa al guardar');
-        
+
         app.gruposController.guardarGrupo();
     });
-    
-    
-     
+
+
+
 
 
 });
@@ -151,8 +151,11 @@ $(document).delegate("#dispositivos", "pagebeforecreate", function () {
 
 
 $(document).delegate("#dispositivos", "pageshow", function () {
+    $.mobile.loading("show");
     app.dispositivosController.cargarMapaDispositivo();
+    app.dispositivosController.actualizarUbicacionMovilUsuario(c.Session.getInstance().get().usuario);
     app.dispositivosController.cargarListaGruposUsuario(c.Session.getInstance().get().usuario);
+    $.mobile.loading("hide");
 //    cargarMapa();
 });
 
