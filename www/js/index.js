@@ -93,7 +93,7 @@ app.agendaController = new c.AgendaController();
 app.notaController = new c.NotaController();
 app.dispositivosController = new c.DispositivosController();
 app.gruposController = new c.GruposController();
-//app.bookingsController = new c.BookingsController();
+app.registroController = new c.RegistroController();
 
 $(document).delegate("#grupos", "pagebeforecreate", function () {
     app.gruposController.init();
@@ -132,7 +132,12 @@ $(document).delegate("#grupos", "pagebeforecreate", function () {
 });
 
 
-
+$(document).delegate("#registro", "pagebeforecreate", function () {
+    app.registroController.init();
+    app.registroController.$btnCrearRegistro.off("tap").on("tap", function () {
+        app.registroController.registrarUsuario();
+    });
+});
 
 $(document).delegate("#dispositivos", "pagebeforecreate", function () {
     app.dispositivosController.init();
