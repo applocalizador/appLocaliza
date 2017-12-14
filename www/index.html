@@ -29,6 +29,8 @@
         <script src="js/nota-controller.js" type="text/javascript"></script>
         <script src="js/dispositivos-controller.js" type="text/javascript"></script>
         <script src="js/grupos-controller.js" type="text/javascript"></script>
+        <script src="js/registro-controller.js" type="text/javascript"></script>
+        
 
         <script src="js/pap-controller.js" type="text/javascript"></script>
         <script src="js/settings.js" type="text/javascript"></script>
@@ -90,19 +92,19 @@
 
                 <a href="#dlg-invalid-credentials" data-rel="popup" data-transition="pop" data-position-to="window" id="btn-submit" 
                    class="ui-btn ui-btn-b ui-corner-all bi-top-margin-1-5">Ingresar</a>
-
+                <a data-role="button" href="#registro" id="btn-registro" data-theme="b" class="ui-btn ui-btn-b ui-corner-all bi-top-margin-1-5">Registrarme</a>
             </div>
         </div>
-<!--        <div data-role="page" id="page-index">
-            <div role="main" class="ui-content">
-                <img src="images/oasys.png" alt="PAP" style="width: 100%">
-                <p class="bi-top-margin-1-5"><b>Usuario Existente</b></p>
-                <a href="#page-signin" class="ui-btn ui-btn-b ui-corner-all">Inicia Sesión</a>
-                <p class="bi-top-margin-1-5"><b>Aún no tienes cuenta?</b></p>
-                <a href="#divRegistrarUsuario" class="ui-btn ui-btn-b ui-corner-all">Registrate</a>
-                <p></p>
-            </div> /content 
-        </div> /page -->
+        <!--        <div data-role="page" id="page-index">
+                    <div role="main" class="ui-content">
+                        <img src="images/oasys.png" alt="PAP" style="width: 100%">
+                        <p class="bi-top-margin-1-5"><b>Usuario Existente</b></p>
+                        <a href="#page-signin" class="ui-btn ui-btn-b ui-corner-all">Inicia Sesión</a>
+                        <p class="bi-top-margin-1-5"><b>Aún no tienes cuenta?</b></p>
+                        <a href="#divRegistrarUsuario" class="ui-btn ui-btn-b ui-corner-all">Registrate</a>
+                        <p></p>
+                    </div> /content 
+                </div> /page -->
 
         <div data-role="page" id="menu">
             <div id="banner" class="section-padding">
@@ -494,15 +496,35 @@
                 </div>-->
 
         <div data-role="page" id="page-remember">
-            <div role="main" class="ui-content">
+            <div data-role="header"  style="background-color:#08b" data-position="fixed" >
                 <a href="#" class="ui-btn ui-corner-all ui-icon-carat-l ui-btn-icon-notext" data-rel="back">Back Icon</a>
-                <!--<img src="images/oasys.png" alt="PAP" style="width: 100%">-->
                 <h3>Restablecer Clave</h3>
+            </div>
+            <div role="main" class="ui-content">
+
+                <!--<img src="images/oasys.png" alt="PAP" style="width: 100%">-->
                 <div id="ctn-err" class="bi-invisible"></div>
                 <label for="txt-documento-recordar">Correo:</label>
                 <input type="number" name="txt-documento-recordar" id="txt-documento-recordar" value="">                                
                 <a href="#dlg-invalid-credentials" data-rel="popup" data-transition="pop" data-position-to="window" id="btn-submit" 
                    class="ui-btn ui-btn-b ui-corner-all bi-top-margin-1-5">Restablecer Clave</a>
+            </div>
+        </div>
+
+        <div data-role="page" id="registro">
+            <div data-role="header"  style="background-color:#08b " data-position="fixed" >
+                <a href="#" class="ui-btn ui-corner-all ui-icon-carat-l ui-btn-icon-notext" data-rel="back">Back Icon</a>
+                <h1>Registro Usuario</h1>
+            </div>
+            <div role="main" class="ui-content">
+
+                <!--<img src="images/oasys.png" alt="PAP" style="width: 100%">-->
+                <div id="registro-mensaje" class="bi-invisible"></div>
+                <p><input id="input-correo" type="email" placeholder="Correo"/></p>
+                <p><input id="input-serial" type="number" placeholder="Celular"/></p>
+                <p><input id="input-clave" type="password" placeholder="Clave"/></p>
+                <p><input id="input-clave-verificada" type="password" placeholder="Verifica Clave"/></p>
+                <a data-role="button" id="btn-crear-registro" data-theme="b" class="ui-btn ui-btn-b ui-corner-all bi-top-margin-1-5">Crear Usuario</a>
             </div>
         </div>
     </body>
