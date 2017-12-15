@@ -1,13 +1,10 @@
-//var servicio = "http://190.14.226.155:8095/paprs/webresources/";
-//var servicio = "http://localhost:9090/webresources/";
-//var servicio = "http://localhost:8080/webresources/";
 
 function message(e) {
     var html = $.parseHTML(e.responseText)
     if (html != null) {
         for (var i = 0; i < html.length; i++) {
             if (html[i].innerHTML != null && html[i].innerHTML.indexOf('java.lang') !== -1) {
-                return html[i].innerHTML.split(":")[1].trim();;
+                return html[i].innerHTML.split(":")[1].trim();
             }
         }
     }
@@ -39,5 +36,10 @@ function redireccionarRecordarClave(buttonIndex) {
     if (buttonIndex == 2) {
         $.mobile.navigate("#page-remember");
     }
+}
+
+function isEmail(email) {
+    var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    return regex.test(email);
 }
 

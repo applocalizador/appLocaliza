@@ -8,9 +8,9 @@ document.write("<script type='text/javascript' src='pap.js'></script>");
 
 $(document).ready(function () {
     $.mobile.loading("show");
-    cargarClientes();
-    cargarDepartamentos();
-    $('#textareaAcuerdo').val(getAcuerdo());
+//    cargarClientes();
+//    cargarDepartamentos();
+//    $('#textareaAcuerdo').val(getAcuerdo());
     $.mobile.loading("hide");
 });
 

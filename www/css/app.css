@@ -32,7 +32,7 @@ h3.bi-text-danger  {
 }
 .bi-invalid-input {
     /*background-color:#fffacd!important;*/
-    background-color:#C20000!important;
+    background-color:#ff9999!important;
 }
 .bi-invalid-select {
     border: 3px solid #ff9999!important;

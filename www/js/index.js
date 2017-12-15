@@ -93,7 +93,7 @@ app.agendaController = new c.AgendaController();
 app.notaController = new c.NotaController();
 app.dispositivosController = new c.DispositivosController();
 app.gruposController = new c.GruposController();
-//app.bookingsController = new c.BookingsController();
+app.registroController = new c.RegistroController();
 
 $(document).delegate("#grupos", "pagebeforecreate", function () {
     app.gruposController.init();
@@ -111,12 +111,12 @@ $(document).delegate("#grupos", "pagebeforecreate", function () {
 
         app.gruposController.cerrarSession();
     });
-    
+
     /*
      app.gruposController.$btnGuardarGrupos.off("tap").on("tap", function () {
-        alert('ingresa');
-        app.gruposController.guardarGrupo();
-    });
+     alert('ingresa');
+     app.gruposController.guardarGrupo();
+     });
      */
     
       app.gruposController.$btnGuardarGrupos.on("click", function (e) {
@@ -140,15 +140,20 @@ $(document).delegate("#grupos", "pagebeforecreate", function () {
           }
               
     });
-    
-    
-     
+
+
+
 
 
 });
 
 
-
+$(document).delegate("#registro", "pagebeforecreate", function () {
+    app.registroController.init();
+    app.registroController.$btnCrearRegistro.off("tap").on("tap", function () {
+        app.registroController.registrarUsuario();
+    });
+});
 
 $(document).delegate("#dispositivos", "pagebeforecreate", function () {
     app.dispositivosController.init();
@@ -169,7 +174,6 @@ $(document).delegate("#dispositivos", "pagebeforecreate", function () {
 $(document).delegate("#dispositivos", "pageshow", function () {
     app.dispositivosController.cargarMapaDispositivo();
     app.dispositivosController.cargarListaGruposUsuario(c.Session.getInstance().get().usuario);
-//    cargarMapa();
 });
 
 $(document).delegate("#page-signin", "pagebeforecreate", function () {
@@ -267,9 +271,15 @@ $(document).delegate("#menu", "pagebeforecreate", function () {
     app.papController.$divIniciarConfirmacion.off("tap").on("tap", function () {
         app.papController.iniciarConfirmacion();
     });
-
 });
 
+$(document).delegate("#menu", "pageshow", function () {
+    if (app.usuarioController.actualizaDatosUsuario(c.Session.getInstance().get().usuario)) {
+        $("#div-datos-usuario").show(1000);
+    } else {
+        $("#div-datos-usuario").hide(1000);
+    }
+});
 $(document).on("pagecontainerbeforechange", function (event, ui) {
 
     if (typeof ui.toPage !== "object")
