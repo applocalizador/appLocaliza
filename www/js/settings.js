@@ -82,7 +82,6 @@ c.Settings.registrarUsuario = servicio + "generic/post/registrar/usuario";
 c.Settings.gruposUrl = servicio + "localizador/get/grupos/usuario/{correo}";
 c.Settings.sessionIdKey = "localiza-session";
 c.Settings.guardarGruposUrl = servicio + "localizador/get/guardarGrupos/usuario/{correo}";
-c.Settings.sessionIdKey = "pap-session";
 c.Settings.sessionTimeoutInMSec = 86400000 * 30;   // 30 days.
 c.Settings.usuario = usuario;
 c.Settings.usuario.dispositivos = Dispositivos;
