@@ -45,7 +45,7 @@ c.GruposController.prototype.cerrarSession = function () {
 
 c.GruposController.prototype.guardarGrupo = function (nombreGrupo,correo) {
     //alert("Ingreso");
-    var url = c.Settings.gruposUrl.replace("{correo}", usuario.correo);
+    var url = c.Settings.guardarGruposUrl.replace("{correo}", correo).replace("{nombreGrupo}", nombreGrupo);
         
     $.ajax({
         url: url,
@@ -56,13 +56,11 @@ c.GruposController.prototype.guardarGrupo = function (nombreGrupo,correo) {
             
      
             
-            
+           alert(resp);  
             
            
             
-           var me = this;
-           $.mobile.navigate(me.$pageGrupos);
-
+        
           
         },
         error: function (e) {
@@ -78,6 +76,14 @@ c.GruposController.prototype.guardarGrupo = function (nombreGrupo,correo) {
     
     
   
+};
+
+c.GruposController.prototype.iraGrupos = function () {
+       var me = this;
+           $.mobile.navigate(me.$pageGrupos);
+
+    
+    
 };
 
 c.GruposController.prototype.cargarGrupos = function (usuario) {
