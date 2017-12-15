@@ -255,9 +255,15 @@ $(document).delegate("#menu", "pagebeforecreate", function () {
     app.papController.$divIniciarConfirmacion.off("tap").on("tap", function () {
         app.papController.iniciarConfirmacion();
     });
-
 });
 
+$(document).delegate("#menu", "pageshow", function () {
+    if (app.usuarioController.actualizaDatosUsuario(c.Session.getInstance().get().usuario)) {
+        $("#div-datos-usuario").show(1000);
+    } else {
+        $("#div-datos-usuario").hide(1000);
+    }
+});
 $(document).on("pagecontainerbeforechange", function (event, ui) {
 
     if (typeof ui.toPage !== "object")

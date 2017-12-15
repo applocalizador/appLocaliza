@@ -130,7 +130,7 @@ c.SignInController.prototype.onSignInCommand = function () {
                 usuario.dispositivos.serial = resp.dispositivos.serial;
 
                 c.Session.getInstance().set({
-                    userProfileModel: resp.nombre + ' ' + resp.apellido,
+                    userProfileModel: resp.correo +'-'+resp.nombre + ' ' + resp.apellido,
                     sessionId: resp.correo,
                     expirationDate: expirationDate,
 //                    keepSignedIn: me.$chkKeepSignedIn.is(":checked"),
