@@ -223,7 +223,7 @@ c.DispositivosController.prototype.cargarMapaDispositivo = function () {
             //maximumAge- Guarda la posicion por 5 minutos 
             //enableHighAccuracy: Se tratan de obtener los mejores resultados posible del GPS
             //timeout: el tiempo maximo que se espera para obtener la posicion en este caso 5 segundos
-            var options = {maximumAge: 500000, enableHighAccuracy: true, timeout: 10000};
+            var options = {maximumAge: 500000, enableHighAccuracy: true, timeout: 5000};
             navigator.geolocation.getCurrentPosition(exito, falla, options);
         }//FIN IF
         else {
