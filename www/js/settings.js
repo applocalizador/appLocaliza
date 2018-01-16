@@ -1,7 +1,9 @@
 //var servicio = "http://rs-pvapp.rhcloud.com/webresources/";
 // var servicio = "http://localhost:8084/localizars/webresources/";
 // var servicio = "http://localhost:8081/webresources/";
-var servicio = "http://190.14.226.155:8095/rs/webresources/";
+//var servicio = "http://190.14.226.155:8095/rs/webresources/";
+var servicio = "http://localizarsjws-app-localizars.7e14.starter-us-west-2.openshiftapps.com/webresources/";
+
 var usuario = {
     codTipoDocumento: 0, documentoIdentidad: null, nombre: null, apellido: null, usuario: null, correo: null, edad: 0, fechaNacimiento: null, codigo: null,
     clave: null, claveConfirmacion: null, sexo: null, direccion: null, telefono: null, telefonoCelular: null, regId: null, dispositivos: Dispositivos
