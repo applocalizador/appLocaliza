@@ -31,7 +31,7 @@ c.DispositivosController.prototype.cargarListaGruposUsuario = function (usuario)
     this.$selectDispositivos.find('option').remove();
     this.$selectDispositivos.append($('<option>', {
         value: -1,
-        text: 'Seleccione Grupo'
+        text: 'Seleccione Dispositivo'
     }, true));
     this.$selectDispositivos.selectmenu('refresh');
     $.ajax({
