@@ -112,13 +112,7 @@ $(document).delegate("#grupos", "pagebeforecreate", function () {
         app.gruposController.cerrarSession();
     });
 
-    /*
-     app.gruposController.$btnGuardarGrupos.off("tap").on("tap", function () {
-     alert('ingresa');
-     app.gruposController.guardarGrupo();
-     });
-     */
-    
+        
       app.gruposController.$btnGuardarGrupos.on("click", function (e) {
         e.preventDefault();
         e.stopImmediatePropagation();  
@@ -126,12 +120,16 @@ $(document).delegate("#grupos", "pagebeforecreate", function () {
         
         if (nombreGrupo != '' ){
             
-          
-        alert('ingresa al guardar'+nombreGrupo+" "+c.Session.getInstance().get().usuario.correo);
-        
+         
+               
         app.gruposController.guardarGrupo(nombreGrupo,c.Session.getInstance().get().usuario.correo);
-            
-            
+      //  $.mobile.navigate("#grupos");  
+        
+        app.gruposController.cargarGrupos(c.Session.getInstance().get().usuario);
+        $('#listaGrupos').listview('refresh');
+         $.mobile.changePage('#grupos', {transition: 'slide'});      
+       
+        
        
           }
           else {

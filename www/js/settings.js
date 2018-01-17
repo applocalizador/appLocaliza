@@ -1,8 +1,8 @@
 //var servicio = "http://rs-pvapp.rhcloud.com/webresources/";
-// var servicio = "http://localhost:8084/localizars/webresources/";
+ var servicio = "http://127.0.0.1:8084/webresources/";
 // var servicio = "http://localhost:8081/webresources/";
 //var servicio = "http://190.14.226.155:8095/rs/webresources/";
-var servicio = "http://localizarsjws-app-localizars.7e14.starter-us-west-2.openshiftapps.com/webresources/";
+//var servicio = "http://localizarsjws-app-localizars.7e14.starter-us-west-2.openshiftapps.com/webresources/";
 
 var usuario = {
     codTipoDocumento: 0, documentoIdentidad: null, nombre: null, apellido: null, usuario: null, correo: null, edad: 0, fechaNacimiento: null, codigo: null,
@@ -83,7 +83,7 @@ c.Settings.localizacionesDispisitivoUrl = servicio + "localizador/post/localizac
 c.Settings.registrarUsuario = servicio + "generic/post/registrar/usuario";
 c.Settings.gruposUrl = servicio + "localizador/get/grupos/usuario/{correo}";
 c.Settings.sessionIdKey = "localiza-session";
-c.Settings.guardarGruposUrl = servicio + "localizador/get/guardarGrupos/usuario/{correo}";
+c.Settings.guardarGruposUrl = servicio + "localizador/get/grupos/guardar/{nombreGrupo}/{correo}";
 c.Settings.sessionTimeoutInMSec = 86400000 * 30;   // 30 days.
 c.Settings.usuario = usuario;
 c.Settings.usuario.dispositivos = Dispositivos;

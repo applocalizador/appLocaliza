@@ -146,8 +146,8 @@
                 <div class="ui-body ui-body-a ui-corner-all" style="background-color:rgba(255, 255, 255, 0.8);padding: 20px">    
 
                     <form style="margin:0px">
-                        <ul data-role="listview" data-inset="true" id="listaGrupos" data-autodividers="true" data-filter="true" data-filter-placeholder="Buscar Grupo" data-filter-reveal="false">
-                            <li data-role="list-divider"></li>
+                        <ul data-role="listview" data-inset="true" style="background-color:#08b " id="listaGrupos" data-autodividers="true" data-filter="true" data-filter-placeholder="Buscar Grupo" data-filter-reveal="false">
+                            <li data-role="list-divider" style="background-color:#08b " ></li>
                             <li id="noGrupo"></li>
 
                         </ul>
@@ -175,7 +175,8 @@
 
             <div data-role="header" id="pgAddGrupoheader" style="background-color:#08b"  data-position="fixed">
                 <h1>Nuevo Grupo</h1>
-                <a data-role="button" href="#grupos" id="pgAddGrupoVolver" style="background-color:#08b" data-icon="arrow-l" class="ui-btn-left">Volver</a>
+                  <a href="#grupos" class="ui-btn ui-corner-all ui-icon-carat-l ui-btn-icon-notext" data-rel="back">Back Icon</a>
+                
             </div>
             <div id="pgAddGrupocontent" data-role="content" class="content">
                 <form action="#" method="post" id="pgAddGrupoForm" name="pgAddGrupoForm">
