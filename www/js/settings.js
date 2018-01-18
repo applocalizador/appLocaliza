@@ -2,6 +2,7 @@
 // var servicio = "http://127.0.0.1:8084/webresources/";
 // var servicio = "http://localhost:8081/webresources/";
 //var servicio = "http://190.14.226.155:8095/rs/webresources/";
+//var servicio = "http://rsapp-rsapp.a3c1.starter-us-west-1.openshiftapps.com/webresources/";
 var servicio = "http://localizarsjws-app-localizars.7e14.starter-us-west-2.openshiftapps.com/webresources/";
 
 var usuario = {
