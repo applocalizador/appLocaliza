@@ -94,6 +94,7 @@ app.notaController = new c.NotaController();
 app.dispositivosController = new c.DispositivosController();
 app.gruposController = new c.GruposController();
 app.registroController = new c.RegistroController();
+app.menuController = new c.MenuController();
 
 $(document).delegate("#grupos", "pagebeforecreate", function () {
     app.gruposController.init();
@@ -261,13 +262,15 @@ $(document).delegate("#mis_ordenes", "pageshow", function () {
 
 $(document).delegate("#menu", "pagebeforecreate", function () {
     app.papController.init();
+    app.menuController.init();
 //    $("#usuario-registrado").text(c.Session.getInstance().get().userProfileModel);
     app.papController.$labelUsuarioRegistrado.text(c.Session.getInstance().get().userProfileModel);
     app.papController.$menuSalir.off("tap").on("tap", function () {
         app.papController.cerrarSession();
     });
-    app.papController.$divIniciarConfirmacion.off("tap").on("tap", function () {
-        app.papController.iniciarConfirmacion();
+    app.menuController.$btnActualizarUsuario.off("tap").on("tap", function () {
+        app.menuController.actualizarDatosUsuario(c.Session.getInstance().get().usuario);
+        $("#div-datos-usuario").hide(1000);
     });
 });
 

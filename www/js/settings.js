@@ -82,6 +82,7 @@ c.Settings.dispositivosUsuarioUrl = servicio + "localizador/get/dispositivos/usu
 c.Settings.dispositivosGrupoUsuarioUrl = servicio + "localizador/get/dispositivos/grupo/usuario/{correo}/{codGrupo}";
 c.Settings.localizacionesDispisitivoUrl = servicio + "localizador/post/localizaciones/dispositivo";
 c.Settings.registrarUsuario = servicio + "generic/post/registrar/usuario";
+c.Settings.actualizarUsuario = servicio + "generic/put/usuario";
 c.Settings.gruposUrl = servicio + "localizador/get/grupos/usuario/{correo}";
 c.Settings.sessionIdKey = "localiza-session";
 c.Settings.guardarGruposUrl = servicio + "localizador/get/grupos/guardar/{nombreGrupo}/{correo}";
