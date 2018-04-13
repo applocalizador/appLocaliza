@@ -1,30 +1,123 @@
 var c = c || {};
-var m;
+var m, latitudeActual = null, longitudActual = null;
+
+
 
 c.DispositivosController = function () {
     this.$dispositivos = null;
     this.$dispositivosSalir = null;
     this.$pageSignIn = null;
     this.$btnCargarDispositivos = null;
-    this.selectDispositivos = null;
+    this.$selectDispositivos = null;
+    this.$selectGrupos = null;
 };
 c.DispositivosController.prototype.init = function () {
     this.$dispositivos = $("#dispositivos");
     this.$dispositivosSalir = $("#dispositivos-salir", this.$dispositivos);
     this.$pageSignIn = "#page-signin";
     this.$btnCargarDispositivos = $("#btn-cargar-dispositivos", this.$dispositivos);
-    this.selectDispositivos = $("#select-dispositivos", this.$dispositivos);
+    this.$selectDispositivos = $("#select-dispositivos", this.$dispositivos);
+    this.$selectGrupos = $("#select-grupos", this.$dispositivos);
+
 };
 
-c.DispositivosController.prototype.cargarListaDispositivos = function (usuario) {
-//    if ($('#epsUsuario').has('option').length <= 1) { selectDispositivos
-    var url = c.Settings.dispositivosUsuarioUrl.replace("{correo}", usuario.correo);
+c.DispositivosController.prototype.cargarListaGruposUsuario = function (usuario) {
+    var url = c.Settings.gruposUrl.replace("{correo}", usuario.correo);
+    this.$selectGrupos.find('option').remove();
+    this.$selectGrupos.append($('<option>', {
+        value: -1,
+        text: 'Seleccione Grupo'
+    }, true));
+    this.$selectDispositivos.find('option').remove();
+    this.$selectDispositivos.append($('<option>', {
+        value: -1,
+        text: 'Seleccione Dispositivo'
+    }, true));
+    this.$selectDispositivos.selectmenu('refresh');
     $.ajax({
         url: url,
         type: c.Settings.TYPE_GET,
         dataType: c.Settings.DATA_TYPE_JSON,
         contentType: c.Settings.APPLICATION_JSON,
         success: function (resp) {
+            for (var n = 0; n < resp.length; n++)
+            {
+                var grupo = JSON.parse(resp[n]);
+
+                $("#select-grupos").append($('<option>', {
+                    value: grupo.gruposPK.codGrupo,
+                    text: grupo.nombre
+                }));
+
+            }
+            $("#select-grupos").selectmenu('refresh');
+        },
+        error: function (e) {
+            var mensaje = message(e);
+            if (mensaje == null) {
+                console.log("error al cargar grupos.")
+            } else {
+                console.log(mensaje);
+            }
+        }
+    });
+};
+
+c.DispositivosController.prototype.actualizarUbicacionMovilUsuario = function (usuario) {
+    if (latitudeActual != null && longitudActual != null) {
+        LocalizacionesDispositivo = new Object();
+        LocalizacionesDispositivo.localizacionesDispositivoPK = new Object();
+        LocalizacionesDispositivo.localizacionesDispositivoPK.correo = usuario.correo;
+        LocalizacionesDispositivo.localizacionesDispositivoPK.codDispositivo = usuario.dispositivos.dispositivosPK.codDispositivo;
+
+        LocalizacionesDispositivo.latitude = latitudeActual;
+        LocalizacionesDispositivo.longitud = longitudActual;
+
+//        LocalizacionesDispositivo.latitude = 4.820259;
+//        LocalizacionesDispositivo.longitud = -75.705327;
+
+        $.ajax({
+            url: c.Settings.localizacionesDispisitivoUrl,
+            type: c.Settings.TYPE_POST,
+            dataType: c.Settings.DATA_TYPE_JSON,
+            contentType: c.Settings.APPLICATION_JSON,
+            data: JSON.stringify(LocalizacionesDispositivo),
+            success: function (resp) {
+                console.log("posicion enviada.")
+            },
+            error: function (e) {
+                var mensaje = message(e);
+                if (mensaje == null) {
+                    console.log("error al enviar la posicion.")
+                } else {
+                    console.log(mensaje);
+                }
+            }
+        });
+    }
+};
+
+c.DispositivosController.prototype.cargarListaDispositivosGrupo = function (usuario, codGrupo) {
+//    if ($('#epsUsuario').has('option').length <= 1) { selectDispositivos
+    $("#select-dispositivos").find('option').remove();
+    $("#select-dispositivos").append($('<option>', {
+        value: -1,
+        text: 'Seleccione Dispositivo'
+    }, true));
+    $("#select-dispositivos").selectmenu('refresh');
+    var url = c.Settings.dispositivosGrupoUsuarioUrl.replace("{correo}", usuario.correo).replace("{codGrupo}", codGrupo);
+    this.$selectDispositivos.find('option').remove();
+    $.ajax({
+        url: url,
+        type: c.Settings.TYPE_GET,
+        dataType: c.Settings.DATA_TYPE_JSON,
+        contentType: c.Settings.APPLICATION_JSON,
+        success: function (resp) {
+            $("#select-dispositivos").find('option').remove();
+            $("#select-dispositivos").append($('<option>', {
+                value: -1,
+                text: 'Seleccione Dispositivo'
+            }, true));
             for (var n = 0; n < resp.length; n++)
             {
                 var object = JSON.parse(resp[n]);
@@ -47,6 +140,7 @@ c.DispositivosController.prototype.cargarListaDispositivos = function (usuario) 
         }
     });
 //    }
+
 };
 
 c.DispositivosController.prototype.cerrarSession = function () {
@@ -88,6 +182,7 @@ c.DispositivosController.prototype.cargarMapaDispositivo = function () {
 //    var defaultPos = new google.maps.LatLng(4.807259, -75.744327);
     var defaultPos = new google.maps.LatLng(4.812132, -75.706377);
 //    MuestraMapa(defaultPos);//temporal
+    $.mobile.loading("show");
     function esperarGps() {
         cordova.plugins.diagnostic.isLocationEnabled(
                 function (enabled) {
@@ -112,6 +207,9 @@ c.DispositivosController.prototype.cargarMapaDispositivo = function () {
     function validarGps() {
         if (navigator.geolocation) {
             function exito(pos) {
+                latitudeActual = pos.coords.latitude;
+                longitudActual = pos.coords.longitude;
+                c.DispositivosController.prototype.actualizarUbicacionMovilUsuario(c.Session.getInstance().get().usuario);
                 MuestraMapa(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
             }
             function falla(error) {
@@ -125,7 +223,7 @@ c.DispositivosController.prototype.cargarMapaDispositivo = function () {
             //maximumAge- Guarda la posicion por 5 minutos 
             //enableHighAccuracy: Se tratan de obtener los mejores resultados posible del GPS
             //timeout: el tiempo maximo que se espera para obtener la posicion en este caso 5 segundos
-            var options = {maximumAge: 500000, enableHighAccuracy: true, timeout: 10000};
+            var options = {maximumAge: 500000, enableHighAccuracy: true, timeout: 5000};
             navigator.geolocation.getCurrentPosition(exito, falla, options);
         }//FIN IF
         else {
@@ -180,6 +278,7 @@ c.DispositivosController.prototype.cargarMapaDispositivo = function () {
             });
         }
         m = map;
+        $.mobile.loading("hide");
     }
     validarGps();
 };

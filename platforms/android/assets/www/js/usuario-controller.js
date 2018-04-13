@@ -54,6 +54,17 @@ c.UsuarioController.prototype.init = function () {
     this.$telefonoEnvio = $("#telefonoEnvio", this.$domicilioPage);
 };
 
+c.UsuarioController.prototype.actualizaDatosUsuario = function (usuario) {
+    var actualiza = false;
+    if (usuario.nombre == null || usuario.nombre.length === 0) {
+        actualiza = true;
+    }
+    if (usuario.apellido == null || usuario.apellido.length === 0) {
+        actualiza = true;
+    }
+    return actualiza;
+};
+
 c.UsuarioController.prototype.cargarDireccionesUsuario = function (usuario) {
     if ($('#direccionesUsuario').has('option').length <= 1) {
         var data = JSON.stringify(usuario);
@@ -168,7 +179,7 @@ c.AutorizacionController.prototype.onConfirmar = function () {
                 if (mensaje == null) {
                     mensajeSoporte();
                 } else {
-                    mensajeAlerta('Error',mensaje);
+                    mensajeAlerta('Error', mensaje);
                 }
             }
         });
@@ -186,7 +197,7 @@ c.UsuarioController.prototype.onSeleccionarDireccion = function () {
     obj = JSON.parse(value);
 //    console.log(obj.d[0].direccion);
     this.$departamentoEnvio.val(obj.d[0].codDepartamento);
-    
+
     this.$municipioEnvio.find('option').remove();
     this.$municipioEnvio.append($('<option>', {
         value: -1,
@@ -211,7 +222,7 @@ c.UsuarioController.prototype.onSeleccionarDireccion = function () {
             $('#municipioEnvio').selectmenu('refresh');
         }
     });
-    
+
 //    var optionValues = [];
 //
 //    this.$municipioEnvio.each(function () {
@@ -322,7 +333,7 @@ c.UsuarioController.prototype.onConfirmarDomicilio = function () {
                 if (mensaje == null) {
                     mensajeSoporte();
                 } else {
-                    mensajeAlerta('Error',mensaje);
+                    mensajeAlerta('Error', mensaje);
                 }
             }
         });
@@ -421,10 +432,10 @@ c.AlistamientoController.prototype.cargarAlistamientosUsuario = function (usuari
                     + '<tbody> ';
             for (var i = 0; i < resp.length; i++) {
                 var object = JSON.parse(resp[i]);
-                medicamentos='';
+                medicamentos = '';
                 //medicamentos=object.medicamentoComercialList;
                 for (var j = 0; j < object.AlistamientoMedicamentoComercialList.length; j++) {
-                    medicamentos += '<tr><td >'+object.AlistamientoMedicamentoComercialList[j].descripcion +'</td><td>'+object.AlistamientoMedicamentoComercialList[j].cantidad+'</td></tr>';
+                    medicamentos += '<tr><td >' + object.AlistamientoMedicamentoComercialList[j].descripcion + '</td><td>' + object.AlistamientoMedicamentoComercialList[j].cantidad + '</td></tr>';
                 }
                 labels += '<tr><td><a href="#alistamiento-popup" onclick="mostrarAlistamientoDetalle(' + object.nap + ',\'' + object.caf.nombre + '\',\'' + object.estado + '\',\'' + object.fechaRegistro + '\',\'' + medicamentos + '\');" '
                         + ' data-rel="popup" data-position-to="window" data-transition="pop" >' + object.nap + '</a></td> '
@@ -448,9 +459,9 @@ c.AlistamientoController.prototype.cargarAlistamientosUsuario = function (usuari
     });
 };
 
-function mostrarAlistamientoDetalle(nap, caf, estado,fecha,medicamentos) {
-    $('#alistamiento-detalle').html('<p>Caf: ' + caf + '</p><p>Autorización: ' + nap + '</p><p>Estado: ' + estado + '</p><p>Fecha solicitud: ' + fecha + '</p>Medicamentos: ' 
-            +'<table data-role="table" id="movie-table" data-mode="column" class="ui-body-d ui-shadow table-stripe ui-responsive"  data-column-popup-theme="a"> '
+function mostrarAlistamientoDetalle(nap, caf, estado, fecha, medicamentos) {
+    $('#alistamiento-detalle').html('<p>Caf: ' + caf + '</p><p>Autorización: ' + nap + '</p><p>Estado: ' + estado + '</p><p>Fecha solicitud: ' + fecha + '</p>Medicamentos: '
+            + '<table data-role="table" id="movie-table" data-mode="column" class="ui-body-d ui-shadow table-stripe ui-responsive"  data-column-popup-theme="a"> '
             + '<thead> <th data-priority="persist">Nombre</th> <th data-priority="persist">Cantidad</th></tr></thead> '
             + '<tbody> ' + medicamentos + '</tbody> </table>');
 }

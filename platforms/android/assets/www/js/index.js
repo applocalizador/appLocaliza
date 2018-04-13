@@ -93,46 +93,86 @@ app.agendaController = new c.AgendaController();
 app.notaController = new c.NotaController();
 app.dispositivosController = new c.DispositivosController();
 app.gruposController = new c.GruposController();
-//app.bookingsController = new c.BookingsController();
+app.registroController = new c.RegistroController();
+app.menuController = new c.MenuController();
 
 $(document).delegate("#grupos", "pagebeforecreate", function () {
     app.gruposController.init();
-       
-  
+
+
     app.gruposController.cargarGrupos(c.Session.getInstance().get().usuario);
 
 
-    /* app.agendaController.$btnCargarAgenda.off("tap").on("tap", function () {
-        app.agendaController.cargarAgendaDia(c.Session.getInstance().get().usuario, app.agendaController.$fechaAgenda.val());
-    });
-    app.agendaController.$agendaSalir.off("tap").on("tap", function () {
-        app.agendaController.cerrarSession();
-    });*/
-    
     app.gruposController.$gruposSalir.off("tap").on("tap", function () {
-         
-         app.gruposController.cerrarSession();
+
+        app.gruposController.cerrarSession();
     });
-    
-     
+
+    app.gruposController.$gruposAddSalir.off("tap").on("tap", function () {
+
+        app.gruposController.cerrarSession();
+    });
+
+        
+      app.gruposController.$btnGuardarGrupos.on("click", function (e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();  
+        var nombreGrupo = app.gruposController.$nombreGrupo.val();
+        
+        if (nombreGrupo != '' ){
+            
+         
+               
+        app.gruposController.guardarGrupo(nombreGrupo,c.Session.getInstance().get().usuario.correo);
+      //  $.mobile.navigate("#grupos");  
+        
+        app.gruposController.cargarGrupos(c.Session.getInstance().get().usuario);
+        $('#listaGrupos').listview('refresh');
+         $.mobile.changePage('#grupos', {transition: 'slide'});      
+       
+        
+       
+          }
+          else {
+               alert('Por favor ingrese el nombre del grupo');
+               app.gruposController.$nombreGrupo.focus();
+          }
+              
+    });
+
+
+
+
+
 });
 
 
-
+$(document).delegate("#registro", "pagebeforecreate", function () {
+    app.registroController.init();
+    app.registroController.$btnCrearRegistro.off("tap").on("tap", function () {
+        app.registroController.registrarUsuario();
+    });
+});
 
 $(document).delegate("#dispositivos", "pagebeforecreate", function () {
     app.dispositivosController.init();
-    app.dispositivosController.cargarListaDispositivos(c.Session.getInstance().get().usuario);
+//    app.dispositivosController.cargarListaDispositivos(c.Session.getInstance().get().usuario);
     app.dispositivosController.$btnCargarDispositivos.off("tap").on("tap", function () {
         app.dispositivosController.cargarMapaDispositivos();
     });
     app.dispositivosController.$dispositivosSalir.off("tap").on("tap", function () {
         app.dispositivosController.cerrarSession();
     });
+
+    app.dispositivosController.$selectGrupos.change(function () {
+        app.dispositivosController.cargarListaDispositivosGrupo(c.Session.getInstance().get().usuario, app.dispositivosController.$selectGrupos.val());
+    });
 });
+
+
 $(document).delegate("#dispositivos", "pageshow", function () {
     app.dispositivosController.cargarMapaDispositivo();
-//    cargarMapa();
+    app.dispositivosController.cargarListaGruposUsuario(c.Session.getInstance().get().usuario);
 });
 
 $(document).delegate("#page-signin", "pagebeforecreate", function () {
@@ -222,17 +262,25 @@ $(document).delegate("#mis_ordenes", "pageshow", function () {
 
 $(document).delegate("#menu", "pagebeforecreate", function () {
     app.papController.init();
+    app.menuController.init();
 //    $("#usuario-registrado").text(c.Session.getInstance().get().userProfileModel);
     app.papController.$labelUsuarioRegistrado.text(c.Session.getInstance().get().userProfileModel);
     app.papController.$menuSalir.off("tap").on("tap", function () {
         app.papController.cerrarSession();
     });
-    app.papController.$divIniciarConfirmacion.off("tap").on("tap", function () {
-        app.papController.iniciarConfirmacion();
+    app.menuController.$btnActualizarUsuario.off("tap").on("tap", function () {
+        app.menuController.actualizarDatosUsuario(c.Session.getInstance().get().usuario);
+        $("#div-datos-usuario").hide(1000);
     });
-
 });
 
+$(document).delegate("#menu", "pageshow", function () {
+    if (app.usuarioController.actualizaDatosUsuario(c.Session.getInstance().get().usuario)) {
+        $("#div-datos-usuario").show(1000);
+    } else {
+        $("#div-datos-usuario").hide(1000);
+    }
+});
 $(document).on("pagecontainerbeforechange", function (event, ui) {
 
     if (typeof ui.toPage !== "object")

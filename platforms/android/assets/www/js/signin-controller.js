@@ -124,9 +124,13 @@ c.SignInController.prototype.onSignInCommand = function () {
                 usuario.nombre = resp.nombre;
                 usuario.apellido = resp.apellido;
                 usuario.correo = resp.correo;
+                usuario.dispositivos.dispositivosPK.correo = resp.dispositivos.dispositivosPK.correo;
+                usuario.dispositivos.dispositivosPK.codDispositivo = resp.dispositivos.dispositivosPK.codDispositivo;
+                usuario.dispositivos.identificador = resp.dispositivos.identificador;
+                usuario.dispositivos.serial = resp.dispositivos.serial;
 
                 c.Session.getInstance().set({
-                    userProfileModel: resp.nombre + ' ' + resp.apellido,
+                    userProfileModel: resp.correo +'-'+resp.nombre + ' ' + resp.apellido,
                     sessionId: resp.correo,
                     expirationDate: expirationDate,
 //                    keepSignedIn: me.$chkKeepSignedIn.is(":checked"),
